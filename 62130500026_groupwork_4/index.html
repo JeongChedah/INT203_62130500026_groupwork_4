@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dr.Stone </title>
+    <link rel="icon" type="image" href="./images/logo.png">
+
+    <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+    <!-- Using via Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <!-- https://tailwindcss.com/docs/installation -->
+    <!-- Using Tailwind via CDN -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+
+    <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+    <!-- Vue CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+
+<body>
+    <div id="app" class="max-w-xl mx-auto my-10 space-x-3 ">
+        <h1 class="text-2xl font-extrabold text-center ">Dr.Stone Gallery</h1>
+        <h1 class="text-1xl font-extrabold text-center ">Likes ({{LikePic}})</h1>
+        <input @keyup="searchName" v-show="search.click" class="border ml-1 p-1 w-5/6 placeholder-gray-500 placeholder-opacity-50 focus:outline-none text-black rounded-sm " type="text " v-model="searchMessages" placeholder="Please enter Charactor">
+        <button @click="searchClick" v-show="search.click" class="mt-1 ml-1"></button>
+        <span class="material-icons mt-1 ml-1" @click="searchClick" v-show="search.notclick">search</span>
+        <button @click="searchClick" v-show="search.click" class="mr-1 p-1 rounded-sm focus:outline-none bg-red-500 ">cancel</button>
+        <div class="absolute w-1/2 flex" v-show="notphoto">
+            <p class="font-bold md:text-center w-1/2 text-2xl self-center md:py-48 h-1/2"> Not Found</p>
+        </div>
+        <ul class="mx-auto px-4">
+            <li v-show="cartoon.show" v-for="(cartoon,index) in cartoons " class="leading-normal m-9 ">
+                <p class="font-semibold text-lg text-green-700">{{cartoon.title}}</p>
+                <img v-bind:src="cartoon.image " class=" transform hover:scale-100 " :alt="cartoon.title" @click="showimg(index)">
+                <p class="text-base">{{cartoon.detail}}</p>
+                <div class="absolute flex justify-center">
+
+                    <div class="flex flex-row justify-start space-x-1">
+                        <p>
+                            <button @click="toggleLike(index)">
+                        <span class="material-icons" v-show="cartoon.unlike">favorite_border</span>
+                      </button>
+                            <button @click="toggleLike(index)">
+                        <span class="material-icons" style="color: red" v-show="cartoon.like">favorite</span>
+                      </button>
+                        </p>
+                    </div>
+            </li>
+        </ul>
+        <div v-show="showimg" class="bg-black bg-opacity-50 w-11/12 mt-10 h-auto flex justify-center absolute">
+            <button @click="closeImg">
+              <span class="material-icons absolute top-0 right-0 text-5xl text-white">
+                close
+              </span>
+            </button>
+            <div class="md:py-40">
+                <img v-bind:src="img" class="item-center" width="400" height="600">
+            </div>
+        </div>
+        </div>
+
+        <!-- my main.js -->
+        <script src="./main.js "></script>
+</body>
+
+</html>
